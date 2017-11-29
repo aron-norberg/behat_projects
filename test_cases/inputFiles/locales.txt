@@ -1,0 +1,3 @@
+https://live-igcommerce.pantheonsite.io/en-us/products
+https://live-igcommerce.pantheonsite.io/cs-cz/vyrobky
+https://live-igcommerce.pantheonsite.io/fr-fr/produits

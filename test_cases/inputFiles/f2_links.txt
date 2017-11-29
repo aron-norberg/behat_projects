@@ -1,0 +1,13 @@
+https://live-igcommerce.pantheonsite.io/en-us/products
+https://live-igcommerce.pantheonsite.io/en-us/products/accessories
+https://live-igcommerce.pantheonsite.io/en-us/products/building-infrastructure
+https://live-igcommerce.pantheonsite.io/en-us/products/calibration-tools
+https://live-igcommerce.pantheonsite.io/en-us/products/electrical-testing
+https://live-igcommerce.pantheonsite.io/en-us/products/electronics-testing
+https://live-igcommerce.pantheonsite.io/en-us/products/fluke-software
+https://live-igcommerce.pantheonsite.io/en-us/products/mechanical-maintenance
+https://live-igcommerce.pantheonsite.io/en-us/products/temperature-measurement
+https://live-igcommerce.pantheonsite.io/en-us/products/thermal-imaging
+https://live-igcommerce.pantheonsite.io/en-us/products/accessories/ir-lenses
+https://live-igcommerce.pantheonsite.io/en-us/products/electrical-testing/portable-oscilloscopes
+https://live-igcommerce.pantheonsite.io/en-us/products/thermal-imaging/infrared-cameras
