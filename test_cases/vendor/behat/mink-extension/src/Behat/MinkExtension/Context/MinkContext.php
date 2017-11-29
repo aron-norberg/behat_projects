@@ -13,6 +13,8 @@ namespace Behat\MinkExtension\Context;
 use Behat\Behat\Context\TranslatableContext;
 use Behat\Gherkin\Node\TableNode;
 
+date_default_timezone_set("Europe/London");
+
 $driver = new \Behat\Mink\Driver\Selenium2Driver('chrome');
 
 require_once __DIR__.'../../../../../../../phpunit/phpunit/src/Framework/Assert/Functions.php';
@@ -544,7 +546,20 @@ class MinkContext extends RawMinkContext implements TranslatableContext
         system(sprintf($this->getMinkParameter('show_cmd'), escapeshellarg($filename)));
     }
 
-    // Custom Functions created by 
+    // Custom Functions created by James 
+
+    /**
+     * Clicks link with specified css selector for links with target="_blank"
+     * @When I follow css :selector target blank
+     * Example: When I follow css ".class a" target
+     */
+    public function clickCssTargetBlank($selector)
+    {
+        $page = $this->getSession()->getPage();
+        $link = $page->find('css', $selector);
+        echo $link = $link->getattribute('href');
+        $this->getSession()->visit($link);
+    }
 
     /**
      * Clicks link with specified css selector
@@ -574,6 +589,28 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     }
 
+    /**
+     *
+     * Checks all text below images 
+     * @Then check all the text below images
+     */
+    public function checkAllTheTextBelowImages()
+    {
+        $page = $this->getSession()->getPage();
+
+        $elementArray = array();
+        $elementArray = $page->findAll('css','.toc-listing-title-h3');
+
+        foreach($elementArray as &$value) {               
+            $value = $value->getText();
+        }
+
+        # convert Array of text to string
+        $elementString = implode(" ",$elementArray);
+
+        # Call check Is In Correct Language
+        $this->checkIsInCorrectLanguage($elementString);
+    }
     /**
     * Checks to see if element is title cased
     * - Checks first word and letter only to see if uppercase.
@@ -649,7 +686,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     public function checkIsInCorrectLanguage($textElement)
     {
 
-
         # Extract the link from the current page
         $currentUrl =  $this->getSession()->getCurrentUrl();
         # parse the url from the link
@@ -661,15 +697,25 @@ class MinkContext extends RawMinkContext implements TranslatableContext
         # Convert back to a string ie "en"
         $urlLocale = implode("",$urlLocale);
 
-        #var_dump($urlLocale);
+        $page = $this->getSession()->getPage();
 
         # Obtain page Content for langid *** Must be greater than 1 word. ***
         # Prefferably many words (10+).
-        $page = $this->getSession()->getPage();
+
+        # Check if #text Element is css or text snippet
+
         $contentNode = $page->find('css', $textElement);
 
-        #convert the text to a raw url (/path/hello%20World)
-        $encodedContent = rawurlencode($contentNode->getText());
+        if($contentNode !== NULL){
+            $contentNode = $contentNode->getText();
+
+        }else{
+
+            $contentNode = $textElement;
+        }
+        
+        $encodedContent = rawurlencode($contentNode);
+
 
         # Call langid for language Verification
         # langid curl all -> you need to ensure the curl server is running

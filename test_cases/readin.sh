@@ -1,7 +1,7 @@
 #!/bin/bash
 
 input2="features/test.feature"
-input="inputFiles/en_us_links.txt"
+input="inputFiles/f2_links.txt"
 
 rm -rf tmp/*
 touch tmp/tmp
@@ -25,9 +25,7 @@ do
   #read base feature and write new file
   
   touch tmp/"${tpath}.feature"
-  #ls tmp 
-  #find Given I am on "en-us/products
-  #sed 's/source/target' file > output; mv file output;
+
   sed 's/Given I am on ".*/Given I am on '"\"$path\""'/g' features/test.feature > tmp/tmp; mv tmp/tmp tmp/${tpath}.feature
 done < "$input"
 

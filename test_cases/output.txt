@@ -1,0 +1,51 @@
+Feature: render
+  In order to see the web page
+  I need to be able to load the web page
+  And the appropriate content should be visible
+
+  Background:                      # features/base.feature:6
+    Given I am on "en-us/products" # FeatureContext::visit()
+
+  Scenario: Does The page render with URL provided? # features/base.feature:10
+    Then the response status code should be 200     # FeatureContext::assertResponseStatus()
+    Then print current URL                          # FeatureContext::printCurrentUrl()
+      │ https://live-igcommerce.pantheonsite.io/en-us/products
+
+  Scenario: Does page render via top navigation?              # features/base.feature:14
+    When I follow css ".top-lvl-products a"                   # FeatureContext::clickCssLink()
+      │ Products
+    Then the response status code should be 200               # FeatureContext::assertResponseStatus()
+    When I follow css ".top-lvl-fluke-connect a" target blank # FeatureContext::clickCssTargetBlank()
+      │ https://connect.fluke.com/en/home
+    Then the response status code should be 200               # FeatureContext::assertResponseStatus()
+    When I move backward one page                             # FeatureContext::back()
+    When I follow css ".top-lvl-solutions a"                  # FeatureContext::clickCssLink()
+      │ Solutions
+    Then the response status code should be 200               # FeatureContext::assertResponseStatus()
+    When I follow css ".top-lvl-training a"                   # FeatureContext::clickCssLink()
+      │ Training
+    Then the response status code should be 200               # FeatureContext::assertResponseStatus()
+    When I follow css ".top-lvl-support a"                    # FeatureContext::clickCssLink()
+      │ Support
+    Then the response status code should be 200               # FeatureContext::assertResponseStatus()
+    When I follow css ".top-lvl-where-to-buy a"               # FeatureContext::clickCssLink()
+      │ Where to buy
+    Then the response status code should be 200               # FeatureContext::assertResponseStatus()
+      Current response status code is 404, but 200 expected. (Behat\Mink\Exception\ExpectationException)
+
+  Scenario: Is there are a page title?            # features/base.feature:37
+    Then the page title and h1 should be the same # FeatureContext::thePageTitleAndHShouldBeTheSame()
+    Then check "h1" is in correct language        # FeatureContext::checkIsInCorrectLanguage()
+      │ string(2) "h1"
+      │ 
+    Then the "h1" element should be title cased   # FeatureContext::elementshouldbetitlecased()
+
+  Scenario: Is the page in the correct language?        # features/base.feature:44
+    Then check ".pane-content p" is in correct language # FeatureContext::checkIsInCorrectLanguage()
+      │ string(15) ".pane-content p"
+      │ 
+
+  Scenario: Is the text below the image in the correct language? # features/base.feature:55
+string(285) "Accessories Building infrastructure Calibration tools Electrical testing Electronics testing Fluke software Intrinsically safe Mechanical maintenance Radiation safety Temperature measurement Thermal imaging New Fluke products Promotions and contests Supplier handbook Test tool catalog"
+
+Fatal error: Call to a member function getText() on a non-object in /Users/jsandov1/Development/behat_projects/test_cases/vendor/behat/mink-extension/src/Behat/MinkExtension/Context/MinkContext.php on line 708

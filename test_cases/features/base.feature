@@ -15,9 +15,11 @@ Feature: render
 		When I follow css ".top-lvl-products a"
 		Then the response status code should be 200
 
-		#TODO :: having a problem with target="_blank"
-		#When I follow css ".top-lvl-fluke-connect a"
-		#Then the response status code should be 200
+		# THis is a blank target, so you need to move backward after executing.
+		When I follow css ".top-lvl-fluke-connect a" target blank
+		Then the response status code should be 200
+
+		When I move backward one page
 
 		When I follow css ".top-lvl-solutions a"
 		Then the response status code should be 200
@@ -50,7 +52,8 @@ Feature: render
 
 	#TODO: Scenario: If there is a missing image, is it populated with image not found?
 
-	#TODO: Scenario: Is the text below the image in the correct language? 		
+	Scenario: Is the text below the image in the correct language?
+		Then check all the text below images
 
 	#TODO: Scenario: Do the images/links match the top nav?
 
@@ -82,8 +85,8 @@ Feature: render
 
 	# SEO # 
 
-	Scenario: Is there a meta title?
-		Then I should see "*asdf" in the "meta" element
+	#TODO:Scenario: Is there a meta title?
+		#Then I should see "*asdf" in the "meta" element
 
 	Scenario: Is the footer in the correct language
 		Then check ".slogan" is in correct language
